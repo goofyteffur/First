@@ -92,8 +92,25 @@ fun MainScreen() {
 
             Spacer(modifier = Modifier.height(5.dp))
 
-                        Button(
-                onClick = { /*  */ },
+            Button(
+                onClick = {
+                    // Берем первый символ из поля ввода (или null, если поле пустое)
+                    val char = inputText.firstOrNull()
+
+                    // Используем оператор when для проверки условий
+                    resultText = when {
+                        char == null -> "Вы ничего не ввели!"
+
+                        !char.isLowerCase() || char !in 'a'..'z' ->
+                            "Ошибка: это не латинская строчная буква!"
+
+                        char in listOf('a', 'e', 'i', 'o', 'u') ->
+                            "Это гласные буквы"
+
+                        else ->
+                            "Возможно, это согласные буквы"
+                    }
+                },
                 modifier = Modifier.width(120.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF6200EE)
